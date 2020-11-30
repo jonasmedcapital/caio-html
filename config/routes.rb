@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     get "/esqueci-minha-senha", to: "web/users/passwords#forgotten", as: :esqueci_minha_senha
   end
 
+  scope path: '/a' do
+    get "/test", to: "web/pages#test"
+  end
+
   namespace :api, path: '/' do
     namespace :v1, path: '/' do
 
@@ -33,8 +37,6 @@ Rails.application.routes.draw do
 
     end
   end
-
-  
 
   get "/dashboard", to: "web/pages#dashboard"
   root "web/pages#home"

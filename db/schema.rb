@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_113235) do
+ActiveRecord::Schema.define(version: 2020_11_30_152920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feature_permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.string "group"
+    t.string "name"
+    t.string "humanize"
+    t.text "notes"
+    t.index ["active"], name: "index_feature_permissions_on_active"
+    t.index ["group"], name: "index_feature_permissions_on_group"
+    t.index ["name"], name: "index_feature_permissions_on_name"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -24,6 +37,54 @@ ActiveRecord::Schema.define(version: 2020_11_30_113235) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "user_permissions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.bigint "user_id"
+    t.string "feature_name"
+    t.bigint "feature_id"
+    t.string "token"
+    t.boolean "can_create", default: false
+    t.boolean "can_update", default: false
+    t.boolean "can_delete", default: false
+    t.boolean "can_read", default: false
+    t.boolean "can_list", default: false
+    t.boolean "can_show", default: false
+    t.boolean "can_index", default: false
+    t.boolean "can_report", default: false
+    t.boolean "can_select", default: false
+    t.boolean "can_assign", default: false
+    t.boolean "can_copy", default: false
+    t.boolean "can_copy_text", default: false
+    t.boolean "can_download", default: false
+    t.boolean "can_upload", default: false
+    t.boolean "can_manage", default: false
+    t.boolean "can_email", default: false
+    t.boolean "can_notification", default: false
+    t.index ["active"], name: "index_user_permissions_on_active"
+    t.index ["can_assign"], name: "index_user_permissions_on_can_assign"
+    t.index ["can_copy"], name: "index_user_permissions_on_can_copy"
+    t.index ["can_copy_text"], name: "index_user_permissions_on_can_copy_text"
+    t.index ["can_create"], name: "index_user_permissions_on_can_create"
+    t.index ["can_delete"], name: "index_user_permissions_on_can_delete"
+    t.index ["can_download"], name: "index_user_permissions_on_can_download"
+    t.index ["can_email"], name: "index_user_permissions_on_can_email"
+    t.index ["can_index"], name: "index_user_permissions_on_can_index"
+    t.index ["can_list"], name: "index_user_permissions_on_can_list"
+    t.index ["can_manage"], name: "index_user_permissions_on_can_manage"
+    t.index ["can_notification"], name: "index_user_permissions_on_can_notification"
+    t.index ["can_read"], name: "index_user_permissions_on_can_read"
+    t.index ["can_report"], name: "index_user_permissions_on_can_report"
+    t.index ["can_select"], name: "index_user_permissions_on_can_select"
+    t.index ["can_show"], name: "index_user_permissions_on_can_show"
+    t.index ["can_update"], name: "index_user_permissions_on_can_update"
+    t.index ["can_upload"], name: "index_user_permissions_on_can_upload"
+    t.index ["feature_id"], name: "index_user_permissions_on_feature_id"
+    t.index ["feature_name"], name: "index_user_permissions_on_feature_name"
+    t.index ["token"], name: "index_user_permissions_on_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +131,6 @@ ActiveRecord::Schema.define(version: 2020_11_30_113235) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "user_permissions", "feature_permissions", column: "feature_id"
+  add_foreign_key "user_permissions", "users"
 end
