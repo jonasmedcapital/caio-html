@@ -1,0 +1,85 @@
+<section class="frame-site-footer-loggedin py-4 w-100" style="bottom:0px;">
+  <div class="row d-flex align-items-center">
+    <div class="col-sm-2 col-lg-2 text-center"></div>
+    <div class="col-sm-8 col-lg-8 text-center">
+      <h6 class="mb-0 s-subtitle-footer" id="creditFooter">© MedCapital 2016-2020. CNPJ 23.448.747/0001-02. Todos os direitos reservados. <br> Feito com <i style="color:#F25F5C;" class="fas fa-heart"></i> e <i style="color:#AFAFAF;" class="fas fa-coffee"></i> em Belo Horizonte-MG. </h6>
+    </div>
+    <div class="col-sm-2 col-lg-2 text-center">
+
+      <% if mobile_device == "mobile" %>
+      <a class="s-subtitle-footer a-dark" href="/descanso-medico" target="blank"><img src="https://medcapital-site-main.s3-sa-east-1.amazonaws.com/images/Prancheta+1.png" alt="descancomedico" style="width:3%;cursor:pointer;"></a>
+      <% else %>
+      <a class="s-subtitle-footer a-dark" href="/descanso-medico" target="blank"><img src="https://medcapital-site-main.s3-sa-east-1.amazonaws.com/images/Prancheta+1.png" alt="descancomedico" style="width:7%;cursor:pointer;"></a>
+      <% end %>
+      <a class="s-subtitle-footer a-dark" href="https://www.facebook.com/medcap/" target="blank"><i class="fab fa-facebook-f white-text mr-2"> </i> </a>
+      <a class="s-subtitle-footer a-dark" href="https://www.linkedin.com/company/medcapital/" target="blank"><i class="fab fa-linkedin-in white-text mr-2"> </i> </a>
+      <a class="s-subtitle-footer a-dark" href="https://www.instagram.com/medcapital/" target="blank"><i class="fab fa-instagram white-tex mr-2"> </i> </a>
+      <a class="s-subtitle-footer a-dark" href="https://api.whatsapp.com/send?phone=5531995351912&text=Olá!" target="blank"><i class="fab fa-whatsapp white-text"></i> </a>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    footerMarginTop();
+
+    $(window).resize(function() {
+      var height = $(window).height();
+      $('body').css('height', height);
+      footerMarginTop()
+    });
+
+    function footerMarginTop() {
+
+      $('body').off('shown.bs.collapse', '.collapse').on('shown.bs.collapse', '.collapse', function() {
+        doFooterMarginTop();
+      });
+      $('body').off('hidden.bs.collapse', '.collapse').on('hidden.bs.collapse', '.collapse', function() {
+        doFooterMarginTop();
+      })
+
+
+      doFooterMarginTop();
+
+      setInterval(function() {
+        doFooterMarginTop();
+      }, 200);
+
+      function doFooterMarginTop() {
+        x = window.matchMedia("(max-width: 575px)")
+        centerText(x);
+        windowHeight = $(window).height();
+        navbarHeight = $('.navbar').height();
+        navbarPadding = Number($('.navbar').css('padding-top').replace("px", "")) + Number($('.navbar').css('padding-bottom').replace("px", ""));
+        progressHeight = $('.progress').height();
+        // containerHeight = $('.container')[0].offsetHeight;
+        containerHeight = $('.container')[0].offsetHeight;
+        footerHeight = $('.frame-site-footer-loggedin').height();
+        footerPadding = Number($('.frame-site-footer-loggedin').css('padding-top').replace("px", "")) + Number($('.frame-site-footer-loggedin').css('padding-bottom').replace("px", ""));
+
+        if (windowHeight > navbarHeight + navbarPadding + progressHeight + containerHeight + footerHeight + (2 * footerPadding)) {
+          $('.frame-site-footer-loggedin').css('position', 'fixed');
+        } else {
+          $('.frame-site-footer-loggedin').css('position', 'relative');
+        }
+        $('.frame-site-footer-loggedin').css('margin-top', footerPadding);
+      }
+
+
+      function centerText(x) {
+        if (x.matches) { // If media query matches
+          $('.frame-site-footer').find('.s-subtitle-footer').each(function() {
+            $(this).addClass("title-footer")
+          });
+          $('.frame-site-footer').find('p').each(function() {
+            $(this).addClass("title-footer")
+          });
+          $('.frame-site-footer').find('.s-title-footer').each(function() {
+            $(this).addClass("title-footer")
+          });
+        } else {}
+      }
+    }
+  });
+</script>

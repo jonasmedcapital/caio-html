@@ -1,0 +1,62 @@
+import { Controller } from "stimulus"
+
+export default class extends Controller {
+  static targets = ["main", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999"]
+
+  connect() {
+    console.log("this is home stimulus")
+
+    var html = `<h1>This is Stimulus home, and works</h1>`
+
+    this.mainTarget.innerHTML = html
+  }
+
+  getControllerByIdentifier(identifier) {
+    return this.application.controllers.find(controller => {
+      return controller.context.identifier === identifier;
+    });
+  }
+
+  nameTarget(target) {
+    return this.targets.find(target)
+  }
+
+  layout() {
+    var targets = ["mainCard"]
+    var identifier = ""
+    // this.getControllerByIdentifier("app--helpers--layout").resizeMainCard(targets, identifier)
+  }
+
+  refreshSaveBtn() {
+    var controller = this
+    this.refreshTimer = setInterval(function () {
+      var len = 0
+      controller.validGroupTargets.forEach(element => {
+        if (this.fromStringToBoolean(element.dataset.valid) == false) {
+          len += 1
+        }
+      });
+      if (len == 0) {
+        controller.saveBtnTarget.disabled = false
+      } else {
+        controller.saveBtnTarget.disabled = true
+      }
+    }, 200);
+  }
+
+  stopRefreshing() {
+    if (this.refreshTimer) {
+      clearInterval(this.refreshTimer)
+    }
+  }
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  // new Promise(function (resolve) {
+  //   resolve()
+  // }).then(() => {
+  // }) 
+
+}
