@@ -47,6 +47,8 @@ gem 'material-sass', '4.1.1'
 gem 'material_icons'
 gem 'font-awesome-sass', '~> 5.8.1'
 
+
+
 # Create pretty URL’s and work with human-friendly strings
 gem 'friendly_id', '~> 5.2.4'
 

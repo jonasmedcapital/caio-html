@@ -1,0 +1,146 @@
+.formcollor{
+  background-color: #053B5E;
+}
+
+.formbottonmarg{
+  margin-bottom: 30px !important;
+}
+
+.mcapimg{
+  margin-top: 7px;
+  width: 350px;
+  color: white !important;
+}
+
+.h1color{
+  color: #086bac;
+}
+
+.margdivform{
+  margin-top: 120px;
+  margin-bottom: 20px;
+}
+
+.margtextform{
+  margin-left: 50px;
+}
+
+.textcolorform{
+  color:#fbfcff;
+}
+
+.inputform {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.submitform {
+  width: 200px;
+  background-color: #26C485;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.submitform:hover {
+  background-color: #086bac;
+}
+
+.textform{
+  color: #fbfcff;
+}
+
+.form-width {
+  width: 75%;
+}
+
+.containercheck {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: white;
+}
+
+/* Hide the browser's default radio button */
+.containercheck input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 19px;
+  width: 19px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.containercheck:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.containercheck input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containercheck input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.containercheck .checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: white;
+}
+
+.iconform{
+    font-size: 70px !important;
+    color: #086bac;
+}
+
+.colorsucess{
+  color: #053B5E;
+}
+
+.imgform{
+  width: 210px;
+  border-radius: 50%;
+}
+
+.spacepage{
+  margin-top: 80px;
+}

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :require_user
+  # before_action :require_user
   # before_action :define_permission, if: :web_controller?
   # before_action :define_navbar_permissions, if: :web_controller?
   # before_action :define_breadcrumb, if: :web_controller?

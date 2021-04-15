@@ -1,6 +1,6 @@
 class Web::PagesController < ApplicationController
 
-  skip_before_action :require_user, only: [:home, :test]
+  # skip_before_action :require_user, only: [:home, :test]
 
   def home
     if current_user
@@ -14,6 +14,8 @@ class Web::PagesController < ApplicationController
 
   def test
   end
-  
+
+  def landingpage
+  end
 
 end

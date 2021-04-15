@@ -2,7 +2,7 @@
 
 class Web::Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  skip_before_action :require_user, only: [:forgotten, :create, :edit, :update]
+  # skip_before_action :require_user, only: [:forgotten, :create, :edit, :update]
   # before_action :check_for_mobile, only: [:edit, :forgotten]
   # skip_before_action :define_permission, only: [:create, :edit, :update]
   # skip_before_action :define_breadcrumb, only: [:create, :edit, :update]
