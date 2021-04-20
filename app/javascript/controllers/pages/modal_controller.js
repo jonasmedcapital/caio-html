@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["main", "image", "text", "dates", "startedAtInput", "", "", "", ""]
+  static targets = ["main", "image", "text", "dates", "startedAtInput", "selecthour", "", "", ""]
 
   connect() {
     this.availableDates = { dates: [
@@ -61,29 +61,30 @@ export default class extends Controller {
     var html = `<div class="col-6 d-flex flex-column">
                   <div class=" spacedate">
                     <div class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">1</i> <b> Passo: Selecionar uma data;</b></h3>
+                      <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">1</i> <b> Selecionar uma data</b></h3>
                     </div>
 
                     <div class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">2</i> <b> Passo: Selecionar um horário;</b></h3>
+                      <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>
                     </div>
 
                     <div class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos"> <span class=""><i class="chip-icon">3</i> <b>Passo: Confirmar Agendamento.</b></h3>
+                      <h3 class="texthrspace modalpassos"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>
                     </div>
                   
                   </div>
                 </div>
                 
                 <div class="col-6 d-flex flex-column">
-                  <div class="spacebuttons card">
+                  <div data-target="${this.controllerName}.selecthour" class="spacebuttons card">
 
                       <div class="row d-flex justify-content-center">
-                        <h3 class="texthrspace colorpassos">Escolha a melhor data para sua consultoria.</h3>
+                        <h3 class="texthrspace colorpassos"><b>Escolha a melhor data para sua consultoria.</b></h3>
                       </div>
                      <div class="row d-flex justify-content-center mb-5">
 
-                      <div data-target="${this.controllerName}.startedAtInput" data-action="change->${this.controllerName}#changeDate" class="button_slide slide_down"><h5 class="h5modal"><b>Selecione uma data</b></h5></div>
+
+                      <button data-target="${this.controllerName}.startedAtInput" data-action="change->${this.controllerName}#changeDate" class="buttonfigma">Selecione uma data</button>
 
                     </div>
                   </div>
@@ -193,7 +194,8 @@ export default class extends Controller {
   }
 
   doHourHtml(){
-    this.novoTargetQueVcVaiDarONomeTarget.innerHTML = ``
+    this.selecthourTarget.innerHTML = ` <div class="spacebuttons card">
+                                        </div>`
   }
   
   // saveTest(){
