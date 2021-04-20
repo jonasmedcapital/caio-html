@@ -20,8 +20,8 @@
 
 .spacedate{
   margin-top: 100px;
-   width: 600px;
-   margin-left: auto;
+  width: 600px;
+  margin-left: auto;
 }
 
 .texthrspace{
@@ -37,8 +37,21 @@
   margin-left: 140px;
 }
 
+.marginl-confirm{
+  margin-left: 100px;
+}
+
 .divmodalpassos{
   margin-left: 150px;
+}
+
+.modalpassos{
+  color: #50514f;
+}
+
+.modalpassos-opacity{
+  color: #50514f;
+  opacity: 30%;
 }
 
 .datebutton{
@@ -55,10 +68,6 @@
 
 
 .colorpassos{
-  color: #50514f;
-}
-
-.modalpassos{
   color: #50514f;
 }
 
@@ -131,8 +140,12 @@
 }
 
 .chip-icon {
-  background-color: #7e7e7e !important;
+  background-color: #26c485 !important;
   color: #fbfcff !important;
+}
+
+.green-icon {
+  color: #26c485 !important;
 }
 
 .button-date{
@@ -146,7 +159,19 @@
   border: none;
   margin-top: 100px;
   font-size: 14px;
+}
 
+.button-confirm{
+  height: 50px;
+  width: 300px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  background: #26C485;
+  box-shadow: 0px 11px 30px;
+  border: none;
+  margin-top: 50px;
+  font-size: 14px;
 }
 
 .button-hour{
@@ -185,4 +210,10 @@
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
+}
+
+.margintlr{
+  margin-top: 100px;
+  margin-left: 70px;
+  margin-right: 70px;
 }

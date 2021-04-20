@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["main", "image", "text", "dates", "startedAtInput", "selectHour", "secondStep", "thirdStep", "cardTitle", "cardBody", "buttonHour"]
+  static targets = ["main", "image", "text", "dates", "startedAtInput", "selectHour", "firstStep", "secondStep", "thirdStep", "cardTitle", "cardBody", "buttonHour"]
 
   connect() {
     this.availableDates = { dates: [
@@ -72,14 +72,16 @@ export default class extends Controller {
   doDateHtml() {
     var html = `<div class="col-6 d-flex flex-column">
                   <div class=" spacedate">
-                    <div class="d-flex divmodalpassos">
+                    <div data-target=${this.controllerName}.firstStep class="d-flex divmodalpassos">
                       <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">1</i> <b> Selecionar uma data</b></h3>
                     </div>
 
                     <div data-target=${this.controllerName}.secondStep class="d-flex divmodalpassos">
+                      <h3 class="texthrspace modalpassos-opacity "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>
                     </div>
 
                     <div data-target=${this.controllerName}.thirdStep class="d-flex divmodalpassos">
+                      <h3 class="texthrspace modalpassos-opacity"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>
                     </div>
                   
                   </div>
@@ -96,7 +98,7 @@ export default class extends Controller {
                     </div>
                   </div>
 
-                  <div class=" col-sm-12 d-flex justify-content-center my-2" id="scheduleViaWhatsApp" style="">Não encontrou um horário ideal? <br><span><a class="a-white" target="blank" href="https://api.whatsapp.com/send?phone=5531995351912&amp;text=Olá, quero agendar uma consultoria. "><span class="ml-1" style="color:#26C485;"> Clique aqui </span> e fale diretamente com um consultor.</a></span></div>
+                  <div class=" col-sm-10 d-flex justify-content-center my-2" id="scheduleViaWhatsApp" style="">Não encontrou um horário ideal? <br><span><a class="a-white" target="blank" href="https://api.whatsapp.com/send?phone=5531995351912&amp;text=Olá, quero agendar uma consultoria. "><span class="ml-1" style="color:#26C485;"> Clique aqui </span> e fale diretamente com um consultor.</a></span></div>
 
                 </div>`
 
@@ -178,6 +180,7 @@ export default class extends Controller {
 
   changeDate(){
     var date = this.startedAtInputTarget.value.split("/")
+    this.selectedDate = this.startedAtInputTarget.value
     var day = Number(date[0])
     var month = date[1]
     var year = Number(date[2])
@@ -204,6 +207,7 @@ export default class extends Controller {
 
   doHourHtml(){
     if(this.startedAtInputTarget.value){
+      this.firstStepTarget.classList.add("modalpassos-opacity")
       this.secondStepTarget.innerHTML = `<h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>`
       this.cardTitleTarget.innerHTML = `<div class="row">
                                           <div class="col-9">
@@ -234,12 +238,29 @@ export default class extends Controller {
   }
 
   selectHour(ev){
+    this.secondStepTarget.classList.add("modalpassos-opacity")
     this.thirdStepTarget.innerHTML = `<h3 class="texthrspace modalpassos"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>`
-    this.cardTitleTarget.innerHTML = `<h3 class="texthrspace colorpassos"><b>Confirmar agendamento</b></h3>`
-    this.cardBodyTarget.innerHTML = `<button data-target="${this.controllerName}.startedAtInput" data-action="change->${this.controllerName}#changeDate" class="button-date">Confirmar</button>`
+    this.cardTitleTarget.innerHTML = `<div class="row">
+                                        <div class="col-9">
+                                          <h3 class="texthrspace marginl-confirm colorpassos"><b>Confirmar agendamento</b></h3>
+                                        </div>
+                                        <div class="col-3 texthrspace margintneg">
+                                          <button data-action="click->${this.controllerName}#reloadSelectData" class="button-change-date"><b></b>Trocar data</b></button>
+                                        </div>
+                                      </div>`
+    this.cardBodyTarget.innerHTML = `<h3 class="texthrspace colorpassos"><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
+                                     <button data-target="${this.controllerName}.startedAtInput" data-action="click->${this.controllerName}#sendData" class="button-confirm">Confirmar</button>`
+    console.log(ev.target)
     this.send_data = { current_user: { current_user_id: this.application.current_user_id}, hour: { hour_id: ev.target.id} }
-
+  }
+  
+  sendData(){
     // chamar fetch para o backend
+    this.thirdStepTarget.classList.add("modalpassos-opacity")
+    this.cardTitleTarget.innerHTML = ``
+    this.cardBodyTarget.innerHTML = `<h3 class="colorpassos margintlr"><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
+                                      <span><i class="material-icons green-icon fa-lg">thumb_up</i>`
+    
   }
 
   getControllerByIdentifier(identifier) {
