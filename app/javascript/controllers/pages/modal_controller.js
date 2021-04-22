@@ -57,48 +57,48 @@ export default class extends Controller {
   }
 
   doImageHtml() {
-    var html = `<img class="imgmodal" src="/logomarca-medcapital.png" alt="MedCapital" >`
+    var html = `<img class="img-modal" src="/logomarca-medcapital.png" alt="MedCapital" >`
 
     this.imageTarget.innerHTML = html
   }
 
   doTexHtml() {
 
-    var html = `<h2 class="colortextmodal"><b>Obrigado ${this.clientName}, agende aqui sua consultoria gratuita!</b></h2>`
+    var html = `<h2 class="color-text-modal"><b>Obrigado ${this.clientName}, agende aqui sua consultoria gratuita!</b></h2>`
 
     this.textTarget.innerHTML = html
   }
 
   doDateHtml() {
     var html = `<div class="col-6 d-flex flex-column">
-                  <div class=" spacedate">
-                    <div data-target=${this.controllerName}.firstStep class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">1</i> <b> Selecionar uma data</b></h3>
+                  <div class=" space-date">
+                    <div data-target=${this.controllerName}.firstStep class="d-flex div-modal-passos">
+                      <h3 class="text-hr-space modal-passos "> <span class=""><i class="chip-icon">1</i> <b> Selecionar uma data</b></h3>
                     </div>
 
-                    <div data-target=${this.controllerName}.secondStep class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos-opacity "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>
+                    <div data-target=${this.controllerName}.secondStep class="d-flex div-modal-passos">
+                      <h3 class="text-hr-space modal-passos-opacity "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>
                     </div>
 
-                    <div data-target=${this.controllerName}.thirdStep class="d-flex divmodalpassos">
-                      <h3 class="texthrspace modalpassos-opacity"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>
+                    <div data-target=${this.controllerName}.thirdStep class="d-flex div-modal-passos">
+                      <h3 class="text-hr-space modal-passos-opacity"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>
                     </div>
                   
                   </div>
                 </div>
                 
                 <div class="col-6 d-flex flex-column">
-                  <div data-target="${this.controllerName}.selectHour" class="spacebuttons card">
+                  <div data-target="${this.controllerName}.selectHour" class="space-buttons card">
 
                       <div data-target=${this.controllerName}.cardTitle class="row d-flex justify-content-center">
-                        <h3 class="texthrspace colorpassos"><b>Escolha a melhor data para sua consultoria.</b></h3>
+                        <h3 class="text-hr-space color-passos"><b>Escolha a melhor data para sua consultoria.</b></h3>
                       </div>
                     <div data-target=${this.controllerName}.cardBody class="row d-flex justify-content-center scrollbar">
                       <button data-target="${this.controllerName}.startedAtInput" class="button-date"><b></b>Selecione uma data</b></button>
                     </div>
                   </div>
 
-                  <div class=" col-sm-8 d-flex justify-content-center my-2" id="scheduleViaWhatsApp" style="">Não encontrou um horário ideal? <br><span><a class="a-white" target="blank" href="https://api.whatsapp.com/send?phone=5531995351912&amp;text=Olá, quero agendar uma consultoria. "><span class="ml-1" style="color:#26C485;"> Clique aqui </span> e fale diretamente com um consultor.</a></span></div>
+                  <div class=" col-sm-8 d-flex ml-3 my-2" id="scheduleViaWhatsApp" style="">Não encontrou um horário ideal? <br><span><a class="a-white" target="blank" href="https://api.whatsapp.com/send?phone=5531995351912&amp;text=Olá, quero agendar uma consultoria. "><span class="ml-1" style="color:#26C485;"> Clique aqui </span> e fale diretamente com um consultor.</a></span></div>
 
                 </div>`
 
@@ -207,16 +207,20 @@ export default class extends Controller {
 
   doHourHtml(){
     if(this.startedAtInputTarget.value){
-      this.firstStepTarget.classList.add("modalpassos-opacity")
-      this.secondStepTarget.innerHTML = `<h3 class="texthrspace modalpassos "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>`
+      this.firstStepTarget.classList.add("modal-passos-opacity")
+      this.secondStepTarget.innerHTML = `<h3 class="text-hr-space modal-passos "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>`
       this.cardTitleTarget.innerHTML = `<div class="row">
                                           <div class="col-9">
-                                            <h3 class="texthrspace marginl colorpassos"><b>Selecione um horário</b></h3>
+                                            <h3 class="text-hr-space margin-l color-passos"><b>Selecione um horário</b></h3>
                                           </div>
-                                          <div class="col-3 texthrspace margintneg">
+                                          <div class="col-3 text-hr-space margin-t-neg">
                                             <button data-target="${this.controllerName}.startedAtInput" class="button-change-date"><b></b>Trocar data</b></button>
                                           </div>
-                                        </div>`
+                                        </div>
+
+                                          <div class="mt-4 mb-3 ">
+                                            <h3><b>Você selecionou o dia ${this.selectedDate}</b></h3>
+                                          </div>`
       
       var bodyHtml = ``
 
@@ -241,17 +245,17 @@ export default class extends Controller {
   }
 
   selectHour(ev){
-    this.secondStepTarget.classList.add("modalpassos-opacity")
-    this.thirdStepTarget.innerHTML = `<h3 class="texthrspace modalpassos"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>`
+    this.secondStepTarget.classList.add("modal-passos-opacity")
+    this.thirdStepTarget.innerHTML = `<h3 class="text-hr-space modal-passos"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>`
     this.cardTitleTarget.innerHTML = `<div class="row">
                                         <div class="col-9">
-                                          <h3 class="texthrspace marginl-confirm colorpassos"><b>Confirmar agendamento</b></h3>
+                                          <h3 class="text-hr-space marginl-confirm color-passos"><b>Confirmar agendamento</b></h3>
                                         </div>
-                                        <div class="col-3 texthrspace margintneg">
+                                        <div class="col-3 text-hr-space margin-t-neg">
                                           <button data-target="${this.controllerName}.startedAtInput" class="button-change-date"><b></b>Trocar data</b></button>
                                         </div>
                                       </div>`
-    this.cardBodyTarget.innerHTML = `<h3 class="texthrspace colorpassos"><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
+    this.cardBodyTarget.innerHTML = `<h3 class="text-hr-space color-passos"><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
                                      <button data-action="click->${this.controllerName}#sendData" class="button-confirm">Confirmar</button>`
     
     var date = new Date()
@@ -262,9 +266,9 @@ export default class extends Controller {
   
   sendData(){
     // chamar fetch para o backend
-    this.thirdStepTarget.classList.add("modalpassos-opacity")
+    this.thirdStepTarget.classList.add("modal-passos-opacity")
     this.cardTitleTarget.innerHTML = ``
-    this.cardBodyTarget.innerHTML = `<h3 class="colorpassos margintlr"><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
+    this.cardBodyTarget.innerHTML = `<h3 class="color-passos margintlr"><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
                                       <span><i class="material-icons green-icon fa-lg">thumb_up</i>`
     
   }

@@ -1,153 +1,85 @@
-
-.imgmodal{
+// logo do site
+.img-modal{
   width: 300px;
   margin-top: 25px;
 }
 
-.colortextmodal{
+//cor do titulo principal
+.color-text-modal{
   color: #50514F;
 
   margin-top: 100px;
 }
 
-
-.spacebuttons{
+// espaçamento dos botóes do site
+.space-buttons{
   margin-top: 100px;
   width: 600px;
   background-color: #fbfcff;
   height: 400px;
 }
 
-.spacedate{
+// espaçamento das 3 etapas de escolher uma data
+.space-date{
   margin-top: 100px;
   width: 600px;
   margin-left: auto;
 }
 
-.texthrspace{
+//margem entre as 3 etapas de escolher data
+.text-hr-space{
   margin-top: 40px;
 }
 
-.margintneg{
+//margem do botão de trocar data
+.margin-t-neg{
   margin-top: 20px;
   margin-left: 0px;
 }
 
-.marginl{
+//margem para o texto de selecionar horario
+.margin-l{
   margin-left: 140px;
 }
 
+//margem de confirmar agendamento
 .marginl-confirm{
   margin-left: 100px;
 }
 
-.divmodalpassos{
+//margem para centralizar os 3 passos ta tela
+.div-modal-passos{
   margin-left: 150px;
 }
 
-.modalpassos{
+//cor do texto dos 3 passos
+.modal-passos{
   color: #50514f;
 }
-
-.modalpassos-opacity{
+ 
+//transparencia dos passos que não estão ativos no momento
+.modal-passos-opacity{
   color: #50514f;
   opacity: 30%;
 }
 
-.datebutton{
-  width: 300px;
-  height: 100px;
-  margin-top: 70px;
-  background-color: #086bac;
-  margin-bottom: 61px;
-}
-
-.colortextbutton{
-  color: white;
-}
-
-
-.colorpassos{
+//cor do texto que fica dentro do card com os horários
+.color-passos{
   color: #50514f;
 }
 
-.btnmodal:hover {
-  transition: 1s ease-in-out;
-  background: #4F95DA;
-}
-
-.btnmodal:hover .svgmodal {
-  stroke-dashoffset: -480;
-}
-
-.btnmodal {
-  background-color: #086bac;
-  font-size: 18px;
-  width: 300px;
-  height: 130px;
-  margin-top: 60px;
-  color: #fff;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 30px;
-}
-
-.button_slide {
-  color: #26c485;
-  border: 2px solid #26c485;
-  border-radius: 0px;
-  padding: 18px 36px;
-  display: inline-block;
-  
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 0 #26c485;
-  -webkit-transition: ease-out 0.4s;
-  -moz-transition: ease-out 0.4s;
-  transition: ease-out 0.4s;
-  margin-bottom: 30px;
-  height: 100px;
-  margin-top: 60px;
-  border-radius: 10px;
-}
-
-.slide_down:hover {
-  box-shadow: inset 0 100px 0 0 #26c485;
-  color: #fff;
-}
-
-.slide_right:hover {
-  box-shadow: inset 400px 0 0 0 #26c485;
-}
-
-.slide_left:hover {
-  box-shadow: inset 0 0 0 50px #26c485;
-}
-
-.slide_diagonal:hover {
-  box-shadow: inset 400px 50px 0 0 #26c485;
-}
-
-#outer {
-  width: 364px;
-  margin: 50px auto 0 auto;
-  text-align: center;
-}
-
-.h5modal{
-  margin-top: 20px;
-}
-
+// circulos com os numéros dos passos
 .chip-icon {
-  background-color: #26c485 !important;
+  background-color: #086bac !important;
   color: #fbfcff !important;
 }
 
+//material icon
 .green-icon {
   color: #26c485 !important;
 }
 
+//botão de selecionar data
 .button-date{
   height: 50px;
   width: 300px;
@@ -161,6 +93,7 @@
   font-size: 14px;
 }
 
+//botão de confirmar agendamento
 .button-confirm{
   height: 50px;
   width: 300px;
@@ -174,13 +107,14 @@
   font-size: 14px;
 }
 
+//botão de selecionar hora
 .button-hour{
   height: 50px;
   width: 150px;
   border-radius: 8px;
   margin-left: 20px;
   color: white;
-  background: #26C485;
+  background: #086bac;
   box-shadow: 0px 11px 30px;
   border-radius: 8px ;
   border: none;
@@ -188,13 +122,14 @@
   font-size: 14px;
 }
 
+//botão de trocar a data
 .button-change-date{
   height: 30px;
   width: 100px;
   border-radius: 8px;
   margin-left: auto;
   color: white;
-  background: #26C485;
+  background: #086bac;
   opacity: 50%;
   box-shadow: 0px 11px 30px;
   border-radius: 8px ;
@@ -213,7 +148,7 @@
 }
 
 .margintlr{
-  margin-top: 100px;
-  margin-left: 70px;
+  margin-top: 150px;
+  margin-left: 80px;
   margin-right: 70px;
 }
