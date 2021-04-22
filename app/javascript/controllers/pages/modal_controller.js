@@ -94,7 +94,7 @@ export default class extends Controller {
                         <h3 class="texthrspace colorpassos"><b>Escolha a melhor data para sua consultoria.</b></h3>
                       </div>
                     <div data-target=${this.controllerName}.cardBody class="row d-flex justify-content-center scrollbar">
-                      <button data-target="${this.controllerName}.startedAtInput" data-action="change->${this.controllerName}#changeDate" class="button-date"><b></b>Selecione uma data</b></button>
+                      <button data-target="${this.controllerName}.startedAtInput" class="button-date"><b></b>Selecione uma data</b></button>
                     </div>
                   </div>
 
@@ -214,11 +214,14 @@ export default class extends Controller {
                                             <h3 class="texthrspace marginl colorpassos"><b>Selecione um horário</b></h3>
                                           </div>
                                           <div class="col-3 texthrspace margintneg">
-                                            <button data-action="click->${this.controllerName}#reloadSelectData" class="button-change-date"><b></b>Trocar data</b></button>
+                                            <button data-target="${this.controllerName}.startedAtInput" class="button-change-date"><b></b>Trocar data</b></button>
                                           </div>
                                         </div>`
       
       var bodyHtml = ``
+
+      var date = new Date()
+      this.pickOnlyFuture($(this.startedAtInputTarget), "yearly", date.getFullYear())
 
       this.avaiableHours.idHours.forEach(element => {
         bodyHtml += `<button id=${element.id} data-action="click->${this.controllerName}#selectHour" data-target="${this.controllerName}.buttonHour-${element.id}" class="button-hour text-center">${element.hour}</button>`
@@ -245,13 +248,16 @@ export default class extends Controller {
                                           <h3 class="texthrspace marginl-confirm colorpassos"><b>Confirmar agendamento</b></h3>
                                         </div>
                                         <div class="col-3 texthrspace margintneg">
-                                          <button data-action="click->${this.controllerName}#reloadSelectData" class="button-change-date"><b></b>Trocar data</b></button>
+                                          <button data-target="${this.controllerName}.startedAtInput" class="button-change-date"><b></b>Trocar data</b></button>
                                         </div>
                                       </div>`
     this.cardBodyTarget.innerHTML = `<h3 class="texthrspace colorpassos"><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
-                                     <button data-target="${this.controllerName}.startedAtInput" data-action="click->${this.controllerName}#sendData" class="button-confirm">Confirmar</button>`
-    console.log(ev.target)
-    this.send_data = { current_user: { current_user_id: this.application.current_user_id}, hour: { hour_id: ev.target.id} }
+                                     <button data-action="click->${this.controllerName}#sendData" class="button-confirm">Confirmar</button>`
+    
+    var date = new Date()
+    this.pickOnlyFuture($(this.startedAtInputTarget), "yearly", date.getFullYear())                                     
+    
+    this.send_data = { current_user: { current_user_id: this.application.current_user_id}, hour: { hour_id: ev.target.id } }
   }
   
   sendData(){
