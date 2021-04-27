@@ -234,7 +234,7 @@ export default class extends Controller {
   // no this.sendData o id e horario selecionada estão guardados
   fetchData() {
     this.cardTitleTarget.innerHTML = ``
-    this.cardBodyTarget.innerHTML = `<h3 class=""><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
+    this.cardBodyTarget.innerHTML = `<h3 class="text-center"><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
                                       <span><i class="material-icons green-icon fa-lg">thumb_up</i>`
     
   }
