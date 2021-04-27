@@ -56,10 +56,10 @@ export default class extends Controller {
                 <div data-target="${this.controllerName}.step" class="d-flex justify-content-center mobile-step-size">
                   <h3 class=""> <span class=""><i class="chip-icon">1</i> <b> Selecionar uma data</b></h3>
                 </div>
-                <div data-target="${this.controllerName}.cardTitle" class="">
+                <div data-target="${this.controllerName}.cardTitle" class="d-flex justify-content-center">
                   <button data-target="${this.controllerName}.startedAtInput" class="mobile-button-date"><b></b>Selecione uma data</b></button>
                 </div>
-                <div data-target="${this.controllerName}.cardBody" class="d-flex justify-content-center">
+                <div data-target="${this.controllerName}.cardBody" class="d-flex justify-content-center row mt-5">
                 </div>`
 
     this.titleTarget.innerHTML = html
@@ -170,17 +170,19 @@ export default class extends Controller {
     if(this.startedAtInputTarget.value){
       this.stepTarget.innerHTML = ``
       this.stepTarget.innerHTML = `<h3 class=""> <span class=""><i class="chip-icon">2</i> <b> Selecione um horário</b></h3>`
-      this.cardTitleTarget.innerHTML = `<div class="">
+      this.cardTitleTarget.innerHTML = `<div class="d-flex-inline">
+                                        <div class="">
                                           <h3><b>Você selecionou o dia ${this.selectedDate}</b></h3>
                                         </div>
-                                        <div class="">
-                                          <div class="">
-                                            <button data-target="${this.controllerName}.startedAtInput" class=""><b></b>Trocar data</b></button>
+                                        
+                                          <div class="d-flex flex-row-reverse">
+                                            <button data-target="${this.controllerName}.startedAtInput" class=" button-change-date-mobile"><b></b>Trocar data</b></button>
                                           </div>
-                                        </div>`
+                                          </div>`
 
       
-      var bodyHtml = ``
+      var bodyHtml = `
+      `
 
       // colocar calendario no button trocar data
       var date = new Date()
@@ -196,7 +198,7 @@ export default class extends Controller {
       // caso existir horarios montar grid de horarios
       } else {
         this.avaiableHours.idHours.forEach(element => {
-          bodyHtml += `<button id=${element.id} data-action="click->${this.controllerName}#selectHour" data-target="${this.controllerName}.buttonHour-${element.id}" class="">${element.hour}</button>`
+          bodyHtml += `<button id=${element.id} data-action="click->${this.controllerName}#selectHour" data-target="${this.controllerName}.buttonHour-${element.id}" class=" mobile-button-hour">${element.hour}</button> `
         });
       }
       this.cardBodyTarget.innerHTML = bodyHtml
@@ -212,13 +214,14 @@ export default class extends Controller {
     // muda os passos, constroi botao submit e mostra detalhes da seleção do cliente
     this.stepTarget.innerHTML = ``
     this.stepTarget.innerHTML = `<h3 class=""> <span class=""><i class="chip-icon">3</i> <b>Confirmar horário</b></h3>`
-    this.cardTitleTarget.innerHTML = `<h3 class=""><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
-                                      <div class="">
-                                        <div class="">
-                                          <button data-target="${this.controllerName}.startedAtInput" class=""><b></b>Trocar data</b></button>
+    this.cardTitleTarget.innerHTML = `<div class="d-flex-inline">
+                                        <h3 class=""><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
+                                      
+                                        <div class="d-flex flex-row-reverse">
+                                          <button data-target="${this.controllerName}.startedAtInput" class="button-change-date-mobile"><b></b>Trocar data</b></button>
                                         </div>
                                       </div>`
-    this.cardBodyTarget.innerHTML = `<button data-action="click->${this.controllerName}#fetchData" class="">Confirmar</button>`
+    this.cardBodyTarget.innerHTML = `<button data-action="click->${this.controllerName}#fetchData" class="mobile-button-acept">Confirmar</button>`
     
     var date = new Date()
     this.pickOnlyFuture($(this.startedAtInputTarget), "yearly", date.getFullYear())                                     
