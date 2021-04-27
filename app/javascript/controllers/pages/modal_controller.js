@@ -97,9 +97,9 @@ export default class extends Controller {
                 <div class="col-6 d-flex flex-column">
                   <div data-target="${this.controllerName}.selectHour" class="space-buttons card">
 
-                      <div data-target=${this.controllerName}.cardTitle class="row d-flex justify-content-center">
-                        <h3 class="text-hr-space color-passos"><b>Escolha a melhor data para sua consultoria.</b></h3>
-                      </div>
+                    <div data-target=${this.controllerName}.cardTitle class="row d-flex justify-content-center">
+                      <h3 class="text-hr-space color-passos"><b>Escolha a melhor data para sua consultoria.</b></h3>
+                    </div>
                     <div data-target=${this.controllerName}.cardBody class="row d-flex justify-content-center scrollbar">
                       <button data-target="${this.controllerName}.startedAtInput" class="button-date"><b></b>Selecione uma data</b></button>
                     </div>
