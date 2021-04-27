@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = ["main", "image", "text", "dates", "startedAtInput", "selectHour", "firstStep", "secondStep", "thirdStep", "cardTitle", "cardBody", "buttonHour"]
 
   connect() {
+    // banco de dados com horarios disponiveis
     this.availableDates = { dates: [
       { id: 1, day: 22, month: "Abr", year: 2021, hour: "08:00", current_user_id: 1 },
       { id: 2, day: 22, month: "Abr", year: 2021, hour: "09:00", current_user_id: 1 },
@@ -33,11 +34,13 @@ export default class extends Controller {
       { id: 15, day: 26, month: "Abr", year: 2021, hour: "11:00", current_user_id: 2 },
     ]}
 
+    // nome do cliente que veio da pagina com o formulário
     this.clientName = "Caio"
     this.controllerName = "pages--modal"
     this.doMainHtml()
   }
 
+  // construir grid da página
   doMainHtml() {
     var html = `<div class="">
                   <div class="row d-flex justify-content-center" data-target="${this.controllerName}.image">
@@ -50,8 +53,13 @@ export default class extends Controller {
 
 
     this.mainTarget.innerHTML = html
+    // inserir img no topo da pagina
     this.doImageHtml()
+
+    // inserir título principal da pagina
     this.doTexHtml()
+
+    // inserir passos e card no body da pagina
     this.doDateHtml()
 
   }
@@ -65,7 +73,6 @@ export default class extends Controller {
   doTexHtml() {
 
     var html = `<h2 class="color-text-modal"><b>Obrigado ${this.clientName}, agende aqui sua consultoria gratuita!</b></h2>`
-
     this.textTarget.innerHTML = html
   }
 
@@ -109,8 +116,9 @@ export default class extends Controller {
 
   }
 
+  // funcao para gerar popup calendario na pagina
   pickOnlyFuture(element, kind, year, month) {
-
+    
     var currentDate = new Date();
     var currentYear = currentDate.getFullYear();
     var currentMonth = currentDate.getMonth() + 1
@@ -167,6 +175,7 @@ export default class extends Controller {
       max: maxDate,
       min: minDate,
       onClose: function (e) {
+        // funcao para guardar a data selecionada pelo cliente
         controller.changeDate();
       },
     });
@@ -178,34 +187,35 @@ export default class extends Controller {
 
   }
 
+
   changeDate(){
+    // target startedAtInput guarda a data selecionada pelo cliente
     var date = this.startedAtInputTarget.value.split("/")
     this.selectedDate = this.startedAtInputTarget.value
     var day = Number(date[0])
     var month = date[1]
     var year = Number(date[2])
    
+    // hash para guardar os horarios disponiveis na data selecionada
+    // hours é um json com os horarios nao repetidos
+    // idHours é um json com id do banco de dados e horarios disponiveis
     this.avaiableHours = { hours: [], idHours: [] }
     
+    // buscar horarios disponiveis a partir da data selecionada (sem repeticao)
     this.availableDates.dates.forEach(element => {
       if (day === element.day && month === element.month && year === element.year) {
         if (!this.avaiableHours.hours.includes(element.hour)) {
           this.avaiableHours.hours.push(element.hour)
           this.avaiableHours.idHours.push({id: element.id, hour: element.hour})
-          this.findedHour = true
         }
       }
     });
 
-    if(this.findedHour){
-      this.doHourHtml()
-    } else {
-      this.getControllerByIdentifier("app--helpers--snackbar").doSnackbar("danger", "Não existe horários disponíveis para essa data", 4000)
-      // this.doDateHtml()
-    }
+    this.doHourHtml()
   }
 
   doHourHtml(){
+    // constroi grid de horarios e muda os passos
     if(this.startedAtInputTarget.value){
       this.firstStepTarget.classList.add("modal-passos-opacity")
       this.secondStepTarget.innerHTML = `<h3 class="text-hr-space modal-passos "> <span class=""><i class="chip-icon">2</i> <b> Selecionar um horário</b></h3>`
@@ -224,13 +234,23 @@ export default class extends Controller {
       
       var bodyHtml = ``
 
+      // colocar calendario no button trocar data
       var date = new Date()
       this.pickOnlyFuture($(this.startedAtInputTarget), "yearly", date.getFullYear())
 
-      this.avaiableHours.idHours.forEach(element => {
-        bodyHtml += `<button id=${element.id} data-action="click->${this.controllerName}#selectHour" data-target="${this.controllerName}.buttonHour-${element.id}" class="button-hour text-center">${element.hour}</button>`
-      });
-      // this.cardBodyTarget.classList.add("flex-column")
+      // verificar se existe algum horario disponivel
+      if(this.avaiableHours.idHours.length == 0) {
+        bodyHtml = `<span class="fa-stack fa-1x">
+                      <i class="fas fa-list fa-lg"></i>
+                    </span>
+                    <h6><b>Não há horários disponíveis nessa data</b></h6>`
+
+      // caso existir horarios montar grid de horarios
+      } else {
+        this.avaiableHours.idHours.forEach(element => {
+          bodyHtml += `<button id=${element.id} data-action="click->${this.controllerName}#selectHour" data-target="${this.controllerName}.buttonHour-${element.id}" class="button-hour text-center">${element.hour}</button>`
+        });
+      }
       this.cardBodyTarget.innerHTML = bodyHtml
 
 
@@ -239,12 +259,9 @@ export default class extends Controller {
     }
   }
 
-  reloadSelectData(){
-    this.findedHour = false
-    this.doDateHtml()
-  }
-
   selectHour(ev){
+    // action executada quando o cliente seleciona alguma hora
+    // muda os passos, constroi botao submit e mostra detalhes da seleção do cliente
     this.secondStepTarget.classList.add("modal-passos-opacity")
     this.thirdStepTarget.innerHTML = `<h3 class="text-hr-space modal-passos"> <span class=""><i class="chip-icon">3</i> <b> Confirmar Agendamento</b></h3>`
     this.cardTitleTarget.innerHTML = `<div class="row">
@@ -256,16 +273,18 @@ export default class extends Controller {
                                         </div>
                                       </div>`
     this.cardBodyTarget.innerHTML = `<h3 class="text-hr-space color-passos"><b>Você escolheu ${this.selectedDate} às ${ev.target.innerText}</b></h3>
-                                     <button data-action="click->${this.controllerName}#sendData" class="button-confirm">Confirmar</button>`
+                                     <button data-action="click->${this.controllerName}#fetchData" class="button-confirm">Confirmar</button>`
     
     var date = new Date()
     this.pickOnlyFuture($(this.startedAtInputTarget), "yearly", date.getFullYear())                                     
     
-    this.send_data = { current_user: { current_user_id: this.application.current_user_id}, hour: { hour_id: ev.target.id } }
+    this.sendData = { hour: { hour_id: ev.target.id } }
   }
   
-  sendData(){
-    // chamar fetch para o backend
+  // chamar fetch para o backend
+  // mensagem de obrigado
+  // no this.sendData o id e horario selecionada estão guardados
+  fetchData() {
     this.thirdStepTarget.classList.add("modal-passos-opacity")
     this.cardTitleTarget.innerHTML = ``
     this.cardBodyTarget.innerHTML = `<h3 class="color-passos margintlr"><b>Obrigado. Sua consultoria foi agendada com sucesso. Entraremos em contato.</b></h3>
