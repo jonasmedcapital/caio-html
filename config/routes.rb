@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "web/pages#dashboard"
   root "web/pages#home"
   
-  get "/formulario-principal", to: "web/pages/lpform/lpform#land_formulario"
+  get "/agendar-mobile", to: "web/pages/modal/modal_mobiles#modal_mobile"
   get "/agendar-horario", to: "web/pages/modal/modal#modal_page"
   get "/formulario-entrada", to: "web/pages/forms/forms#dashboard"
   get "/land-white", to: "web/pages/landings/landings#land_white"
